@@ -1,0 +1,54 @@
+/*===INTRO LAYOUT STYLE===*/
+.intro-container {
+  display: flex;
+  min-height: 100vh;
+  padding: 60px;
+  gap: 60px;
+}
+
+.intro-left {
+  flex: 1;
+}
+
+.intro-right {
+  flex: 1;
+  background: #f8f9fb;
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.primary-btn {
+  background-color: #2d8cff;
+  color: white;
+  padding: 16px 32px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.primary-btn:hover {
+  opacity: 0.9;
+}
+
+.feature-item {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.icon-placeholder {
+  width: 40px;
+  height: 40px;
+  background: #dbeafe;
+  border-radius: 10px;
+}
+
+@media (max-width: 900px) {
+  .intro-container{
+    flex-direction: column;
+    padding: 24px;
+  }
+}
+  

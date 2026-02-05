@@ -1,0 +1,474 @@
+/* Main container with gradient background */
+.transaction-form-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--cyan-blue) 50%, var(--yellow-gold) 100%);
+  font-family: 'Times New Roman', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background overlay for depth */
+.transaction-form-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg,
+    rgba(0, 73, 183, 0.05) 0%,
+    rgba(0, 221, 255, 0.05) 50%,
+    rgba(255, 246, 133, 0.05) 100%);
+  z-index: 1;
+}
+
+/* Main content wrapper */
+.transaction-form-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.transaction-form-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: slideInDown 1s ease-out;
+}
+
+.transaction-form-header h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px var(--shadow-dark);
+  background: linear-gradient(45deg, var(--yellow-gold), var(--cyan-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Form Container */
+.transaction-form-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 12px 40px var(--shadow-dark);
+  animation: slideInUp 1s ease-out 0.3s both;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.form-label::after {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: var(--cyan-blue);
+  border-radius: 50%;
+  margin-left: 0.5rem;
+}
+
+/* Form Inputs */
+.transaction-input,
+.transaction-select {
+  width: 100%;
+  padding: 1rem;
+  background: var(--input-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid var(--input-border);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px var(--shadow-light);
+}
+
+.transaction-input:focus,
+.transaction-select:focus {
+  outline: none;
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 3px rgba(0, 221, 255, 0.2), 0 8px 24px var(--shadow-dark);
+  transform: translateY(-2px);
+}
+
+.transaction-input:disabled,
+.transaction-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.transaction-input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Type Selection Special Styling */
+.type-selector {
+  position: relative;
+}
+
+.type-selector .transaction-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+.type-income {
+  border-left: 4px solid var(--income-color);
+  background: linear-gradient(90deg, rgba(40, 167, 69, 0.1), var(--input-bg));
+}
+
+.type-expense {
+  border-left: 4px solid var(--expense-color);
+  background: linear-gradient(90deg, rgba(255, 0, 64, 0.1), var(--input-bg));
+}
+
+/* Amount Input Special Styling */
+.amount-input {
+  position: relative;
+}
+
+.amount-input .transaction-input {
+  padding-left: 3rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.amount-input::before {
+  content: '₦';
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--yellow-gold);
+  z-index: 2;
+}
+
+/* Category Selection */
+.category-select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  appearance: none;
+}
+
+/* Date Input Styling */
+.date-input .transaction-input {
+  cursor: pointer;
+}
+
+/* Submit Button */
+.transaction-submit-btn {
+  width: 100%;
+  background: var(--button-primary);
+  border: none;
+  border-radius: 15px;
+  padding: 1.2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px var(--shadow-light);
+  position: relative;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.transaction-submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.transaction-submit-btn:hover::before {
+  left: 100%;
+}
+
+.transaction-submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px var(--shadow-dark);
+}
+
+.transaction-submit-btn:active {
+  transform: translateY(-1px);
+}
+
+.transaction-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Success Animation */
+.transaction-form-card.success {
+  animation: successPulse 0.6s ease-out;
+}
+
+@keyframes successPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* Transaction Type Indicator */
+.transaction-type-indicator {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.transaction-type-indicator.income {
+  background: rgba(40, 167, 69, 0.2);
+  color: #28a745;
+  border: 1px solid rgba(40, 167, 69, 0.4);
+}
+
+.transaction-type-indicator.expense {
+  background: rgba(255, 0, 64, 0.2);
+  color: var(--bright-red);
+  border: 1px solid rgba(255, 0, 64, 0.4);
+}
+
+/* Form Validation */
+.form-group.error .transaction-input,
+.form-group.error .transaction-select {
+  border-color: var(--bright-red);
+  box-shadow: 0 0 0 3px rgba(255, 0, 64, 0.2);
+}
+
+.form-group.success .transaction-input,
+.form-group.success .transaction-select {
+  border-color: #28a745;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+}
+
+.error-message {
+  color: var(--bright-red);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.error-message::before {
+  content: '⚠️';
+  margin-right: 0.5rem;
+}
+
+/* Quick Amount Buttons */
+.quick-amounts {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.quick-amount-btn {
+  padding: 0.5rem 1rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.quick-amount-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px var(--shadow-light);
+  border-color: var(--cyan-blue);
+}
+
+.quick-amount-btn.active {
+  background: var(--button-primary);
+  color: white;
+  border-color: var(--cyan-blue);
+}
+
+/* Animations */
+@keyframes slideInDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .transaction-form-content {
+    padding: 1rem;
+  }
+
+  .transaction-form-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .transaction-form-card {
+    padding: 2rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .transaction-input,
+  .transaction-select {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .amount-input .transaction-input {
+    padding-left: 2.5rem;
+    font-size: 1rem;
+  }
+
+  .amount-input::before {
+    left: 0.8rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .transaction-form-header h1 {
+    font-size: 2rem;
+  }
+
+  .transaction-form-card {
+    padding: 1.5rem;
+  }
+
+  .transaction-submit-btn {
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .quick-amounts {
+    gap: 0.25rem;
+  }
+
+  .quick-amount-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Loading state */
+.transaction-form-card.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.transaction-form-card.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 4px solid var(--glass-border);
+  border-top: 4px solid var(--cyan-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Enhanced focus states for accessibility */
+.transaction-input:focus,
+.transaction-select:focus,
+.transaction-submit-btn:focus,
+.quick-amount-btn:focus {
+  outline: 2px solid var(--cyan-blue);
+  outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+  .transaction-form-container {
+    background: white !important;
+  }
+
+  .transaction-form-container::before {
+    display: none;
+  }
+
+  .transaction-form-card {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+  }
+
+  .transaction-input,
+  .transaction-select,
+  .transaction-submit-btn {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    color: black !important;
+  }
+}

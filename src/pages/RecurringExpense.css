@@ -1,0 +1,537 @@
+/* Main container with gradient background */
+.recurring-expenses-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--cyan-blue) 50%, var(--yellow-gold) 100%);
+  font-family: 'Times New Roman', sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background overlay for depth */
+.recurring-expenses-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg,
+    rgba(0, 73, 183, 0.05) 0%,
+    rgba(0, 221, 255, 0.05) 50%,
+    rgba(255, 246, 133, 0.05) 100%);
+  z-index: 1;
+}
+
+/* Main content wrapper */
+.recurring-expenses-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.recurring-expenses-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: slideInDown 1s ease-out;
+}
+
+.recurring-expenses-header h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px var(--shadow-dark);
+  background: linear-gradient(45deg, var(--yellow-gold), var(--cyan-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Add Expense Section */
+.add-expense-section {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 12px 40px var(--shadow-dark);
+  animation: slideInUp 1s ease-out 0.3s both;
+}
+
+.add-expense-section h2 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 1px 1px 2px var(--shadow-dark);
+}
+
+.add-expense-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 1rem;
+  align-items: end;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.form-label::after {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: var(--cyan-blue);
+  border-radius: 50%;
+  margin-left: 0.5rem;
+}
+
+/* Form Inputs */
+.expense-input,
+.expense-select {
+  padding: 1rem;
+  background: var(--input-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid var(--input-border);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px var(--shadow-light);
+}
+
+.expense-input:focus,
+.expense-select:focus {
+  outline: none;
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 3px rgba(0, 221, 255, 0.2), 0 8px 24px var(--shadow-dark);
+  transform: translateY(-2px);
+}
+
+.expense-input::placeholder {
+  color: var(--text-secondary);
+}
+
+/* Add Button */
+.add-expense-btn {
+  background: var(--button-primary);
+  border: none;
+  border-radius: 15px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px var(--shadow-light);
+  position: relative;
+  overflow: hidden;
+  min-width: 120px;
+}
+
+.add-expense-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.add-expense-btn:hover::before {
+  left: 100%;
+}
+
+.add-expense-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px var(--shadow-dark);
+}
+
+.add-expense-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Expenses List Section */
+.expenses-list-section {
+  animation: slideInUp 1s ease-out 0.6s both;
+}
+
+.expenses-list-section h2 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 1px 1px 2px var(--shadow-dark);
+}
+
+.expenses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.expense-item {
+  background: var(--expense-card-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid var(--expense-card-border);
+  border-radius: 15px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 32px var(--shadow-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.expense-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--cyan-blue), var(--yellow-gold));
+  transition: width 0.3s ease;
+}
+
+.expense-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px var(--shadow-dark);
+  border-color: var(--cyan-blue);
+}
+
+.expense-item:hover::before {
+  width: 6px;
+}
+
+.expense-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.expense-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.expense-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.expense-amount {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--yellow-gold);
+  margin: 0;
+}
+
+.expense-frequency {
+  background: var(--glass-bg);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border);
+}
+
+.expense-frequency.monthly {
+  border-color: var(--cyan-blue);
+  color: var(--cyan-blue);
+}
+
+.expense-frequency.yearly {
+  border-color: var(--pink-magenta);
+  color: var(--pink-magenta);
+}
+
+/* Remove Button */
+.remove-expense-btn {
+  background: var(--button-danger);
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px var(--shadow-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.remove-expense-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.remove-expense-btn:hover::before {
+  left: 100%;
+}
+
+.remove-expense-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--shadow-dark);
+  background: linear-gradient(135deg, var(--bright-red), #ff3366);
+}
+
+.remove-expense-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Total Expenses Summary */
+.total-expenses-summary {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem;
+  margin-top: 2rem;
+  text-align: center;
+  box-shadow: 0 12px 40px var(--shadow-dark);
+  animation: fadeInScale 1s ease-out 0.9s both;
+}
+
+.total-expenses-summary h3 {
+  font-size: 1.8rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 2px var(--shadow-dark);
+}
+
+.total-amount {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--yellow-gold);
+  text-shadow: 2px 2px 4px var(--shadow-dark);
+  margin: 0;
+}
+
+/* Animations */
+@keyframes slideInDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .recurring-expenses-content {
+    padding: 1rem;
+  }
+
+  .recurring-expenses-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .add-expense-section {
+    padding: 1.5rem;
+  }
+
+  .add-expense-form {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .add-expense-btn {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .expense-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .expense-info {
+    width: 100%;
+  }
+
+  .remove-expense-btn {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .total-expenses-summary {
+    padding: 1.5rem;
+  }
+
+  .total-amount {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .recurring-expenses-header h1 {
+    font-size: 2rem;
+  }
+
+  .add-expense-section h2,
+  .expenses-list-section h2 {
+    font-size: 1.8rem;
+  }
+
+  .expense-input,
+  .expense-select {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .add-expense-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .expense-item {
+    padding: 1rem;
+  }
+
+  .expense-name {
+    font-size: 1.1rem;
+  }
+
+  .expense-amount {
+    font-size: 1.2rem;
+  }
+
+  .total-expenses-summary h3 {
+    font-size: 1.5rem;
+  }
+
+  .total-amount {
+    font-size: 1.8rem;
+  }
+}
+
+/* Empty state */
+.expenses-empty {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.expenses-empty::before {
+  content: '💸';
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Loading state */
+.add-expense-section.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.add-expense-section.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 4px solid var(--glass-border);
+  border-top: 4px solid var(--cyan-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Success animation for new expense */
+.expense-item.new-expense {
+  animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
